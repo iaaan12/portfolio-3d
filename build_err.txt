@@ -1,0 +1,29 @@
+
+> temp-app@0.0.0 build
+> vite build
+
+[36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32mÔ£ô[39m 2138 modules transformed.
+Ô£ù Build failed in 2.79s
+error during build:
+src/components/ui/orbiting-skills.jsx (7:4): "SiVisualstudiocode" is not exported by "node_modules/react-icons/si/index.mjs", imported by "src/components/ui/orbiting-skills.jsx".
+file: D:/Trabajos-IA/Workpaces Antigravity/Portfolio/src/components/ui/orbiting-skills.jsx:7:4
+
+5:     SiMysql, SiHtml5, SiCss3, SiJson, SiReact, SiNextdotjs,
+6:     SiAngular, SiVuedotjs, SiTailwindcss, SiGit, SiGithub,
+7:     SiVisualstudiocode
+       ^
+8: } from 'react-icons/si';
+9: import { BsCursorFill } from 'react-icons/bs';
+
+    at getRollupError (file:///D:/Trabajos-IA/Workpaces%20Antigravity/Portfolio/node_modules/rollup/dist/es/shared/parseAst.js:402:41)
+    at error (file:///D:/Trabajos-IA/Workpaces%20Antigravity/Portfolio/node_modules/rollup/dist/es/shared/parseAst.js:398:42)
+    at Module.error (file:///D:/Trabajos-IA/Workpaces%20Antigravity/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:17040:16)
+    at Module.traceVariable (file:///D:/Trabajos-IA/Workpaces%20Antigravity/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:17452:29)
+    at ModuleScope.findVariable (file:///D:/Trabajos-IA/Workpaces%20Antigravity/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:15070:39)
+    at Identifier.bind (file:///D:/Trabajos-IA/Workpaces%20Antigravity/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:5447:40)
+    at Property.bind (file:///D:/Trabajos-IA/Workpaces%20Antigravity/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:2829:23)
+    at ObjectExpression.bind (file:///D:/Trabajos-IA/Workpaces%20Antigravity/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:2825:28)
+    at ArrayExpression.bind (file:///D:/Trabajos-IA/Workpaces%20Antigravity/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:2825:28)
+    at VariableDeclarator.bind (file:///D:/Trabajos-IA/Workpaces%20Antigravity/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:2829:23)
