@@ -92,7 +92,7 @@ export default function About() {
                         {/* Preserved 3D Pin Animation */}
                         <div className="flex w-full relative items-center justify-center min-h-[400px]">
                             <PinContainer title="Optimizar Conversión" href="#portfolio">
-                                <div className="aspect-square w-64 md:w-80 glass-card rounded-3xl p-8 relative overflow-hidden group border border-[var(--border)] bg-[rgba(8,12,20,0.5)]">
+                                <div className="w-[260px] h-[320px] sm:w-[280px] md:w-80 md:h-80 glass-card rounded-3xl p-6 md:p-8 relative overflow-hidden group border border-[var(--border)] bg-[rgba(8,12,20,0.5)]">
                                     <div className="absolute inset-0 bg-gradient-to-tr from-[var(--blue2)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                     <div className="h-full w-full rounded-2xl border border-[var(--border2)] bg-[var(--bg2)]/90 flex flex-col justify-center items-center gap-4 relative z-10">
                                         <div className="w-16 h-16 rounded-xl bg-[var(--bg3)] border border-[var(--border)] flex items-center justify-center rotate-3 hover:rotate-6 transition-transform">
