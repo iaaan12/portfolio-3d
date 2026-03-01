@@ -7,10 +7,10 @@ export default function SplineRoom({ onBack }) {
 
     useEffect(() => {
         // Carga de script de Spline Viewer si no existe en el DOM
-        if (!document.querySelector('script[src="https://unpkg.com/@splinetool/viewer@1.0.51/build/spline-viewer.js"]')) {
+        if (!document.querySelector('script[src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"]')) {
             const script = document.createElement('script');
             script.type = 'module';
-            script.src = 'https://unpkg.com/@splinetool/viewer@1.0.51/build/spline-viewer.js';
+            script.src = 'https://unpkg.com/@splinetool/viewer/build/spline-viewer.js';
             document.body.appendChild(script);
         }
     }, []);
