@@ -13,6 +13,7 @@ const RPG3D = lazy(() => import("./ui/3d/RPG3D"));
 export default function WelcomeScreen({ onSelect }) {
     const [selectedMode, setSelectedMode] = useState(null);
     const [init, setInit] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
     // Global Audio Context
     const { isMuted } = useAudio();
@@ -22,13 +23,22 @@ export default function WelcomeScreen({ onSelect }) {
     const [playTechClick] = useSound('/assets/sounds/click-tech.wav', { volume: 0.6 });
     const [playRetroClick] = useSound('/assets/sounds/click-retro.mp3', { volume: 0.5 });
 
-    // Initialize Particles
+    // Handle Resize & Device Detection
     useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+
         initParticlesEngine(async (engine) => {
             await loadSlim(engine);
         }).then(() => {
             setInit(true);
         });
+
+        return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
     const handleSelect = (mode) => {
@@ -147,7 +157,7 @@ export default function WelcomeScreen({ onSelect }) {
                 />
 
                 {/* Background Particles & 3D Interactive Model */}
-                {init && !selectedMode && (
+                {init && !selectedMode && !isMobile && (
                     <>
                         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none z-0">
                             <Suspense fallback={null}>
@@ -215,7 +225,7 @@ export default function WelcomeScreen({ onSelect }) {
                 />
 
                 {/* Background Particles & 3D Interactive Model */}
-                {init && !selectedMode && (
+                {init && !selectedMode && !isMobile && (
                     <>
                         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none z-0">
                             <Suspense fallback={null}>
