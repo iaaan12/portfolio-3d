@@ -1,6 +1,18 @@
 import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { useAudio } from '../context/AudioContext';
 
 export default function RpgGame({ onBack }) {
+    const { isMuted } = useAudio();
+    const iframeRef = useRef(null);
+
+    // Sync mute state to iframe whenever it changes
+    useEffect(() => {
+        if (iframeRef.current && iframeRef.current.contentWindow) {
+            iframeRef.current.contentWindow.postMessage(isMuted ? 'mute' : 'unmute', '*');
+        }
+    }, [isMuted]);
+
     return (
         <div className="absolute inset-0 bg-[#091209] overflow-hidden w-full h-[100dvh]">
             {/* Back Button Overlay */}
@@ -22,7 +34,8 @@ export default function RpgGame({ onBack }) {
 
             {/* Iframe loading the standalone HTML game */}
             <iframe
-                src="/ian-rpg.html"
+                ref={iframeRef}
+                src={`/ian-rpg.html?muted=${isMuted}`}
                 title="Ian Gianera - RPG Portfolio"
                 className="w-full h-full border-none m-0 p-0 block"
             />

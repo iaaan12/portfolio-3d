@@ -8,7 +8,7 @@ export default function AudioController() {
     return (
         <button
             onClick={toggleMute}
-            className="fixed bottom-6 right-6 z-[9999] p-3 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-white hover:bg-white/10 transition-colors shadow-lg group"
+            className="fixed top-4 right-4 md:top-auto md:bottom-6 md:right-6 z-[9999] p-3 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-white hover:bg-white/10 transition-colors shadow-lg group"
             aria-label={isMuted ? "Unmute audio" : "Mute audio"}
         >
             {isMuted ? (

@@ -525,13 +525,20 @@
     //  AUDIO & MUSIC SYSTEM
     // ═══════════════════════════════════════════════════════
     let actx = null;
+    let isGlobalMuted = new URLSearchParams(window.location.search).get('muted') === 'true';
+
+    window.addEventListener('message', (e) => {
+      if (e.data === 'mute') isGlobalMuted = true;
+      if (e.data === 'unmute') isGlobalMuted = false;
+    });
+
     function initAudio() {
       if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
       if (actx.state === 'suspended') actx.resume();
     }
 
     function playBeep(freq, type, dur, vol) {
-      if (!actx) return;
+      if (!actx || isGlobalMuted) return;
       const osc = actx.createOscillator();
       const gain = actx.createGain();
       osc.type = type; osc.frequency.setValueAtTime(freq, actx.currentTime);
@@ -542,7 +549,7 @@
     }
 
     function playStep() {
-      if (!actx) return;
+      if (!actx || isGlobalMuted) return;
       const buf = actx.createBuffer(1, actx.sampleRate * 0.05, actx.sampleRate);
       const data = buf.getChannelData(0);
       for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * 0.5;
@@ -557,16 +564,19 @@
     const ambientNotes = [110.00, 130.81, 164.81, 196.00, 220.00, 261.63, 329.63, 392.00];
     function ambientLoop() {
       if (!gameRunning || !actx) return;
-      const note = ambientNotes[Math.floor(Math.random() * ambientNotes.length)];
-      const osc = actx.createOscillator();
-      const gain = actx.createGain();
-      osc.type = 'sine';
-      osc.frequency.value = note;
-      gain.gain.setValueAtTime(0, actx.currentTime);
-      gain.gain.linearRampToValueAtTime(0.04, actx.currentTime + 2);
-      gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 6);
-      osc.connect(gain); gain.connect(actx.destination);
-      osc.start(); osc.stop(actx.currentTime + 6);
+      
+      if (!isGlobalMuted) {
+        const note = ambientNotes[Math.floor(Math.random() * ambientNotes.length)];
+        const osc = actx.createOscillator();
+        const gain = actx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = note;
+        gain.gain.setValueAtTime(0, actx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.04, actx.currentTime + 2);
+        gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 6);
+        osc.connect(gain); gain.connect(actx.destination);
+        osc.start(); osc.stop(actx.currentTime + 6);
+      }
 
       setTimeout(ambientLoop, 1500 + Math.random() * 2000);
     }
