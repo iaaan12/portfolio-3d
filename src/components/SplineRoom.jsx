@@ -19,6 +19,7 @@ export default function SplineRoom({ onBack }) {
         const handleMouseDown = (evento) => {
             // evento.detail.name retorna el nombre del objeto clicado en la escena de Spline
             const nombreObjeto = evento.detail?.name;
+            console.log("Tocaste el objeto llamado: '" + nombreObjeto + "'");
 
             switch (nombreObjeto) {
                 case 'skills':
