@@ -47,12 +47,12 @@ export default function SplineRoom({ onBack }) {
 
         const container = containerRef.current;
         if (container) {
-            container.addEventListener('mouse-down', handleMouseDown);
+            container.addEventListener('mouseDown', handleMouseDown);
         }
 
         return () => {
             if (container) {
-                container.removeEventListener('mouse-down', handleMouseDown);
+                container.removeEventListener('mouseDown', handleMouseDown);
             }
         };
     }, []);
